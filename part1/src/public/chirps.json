@@ -1,0 +1,70 @@
+{
+  "chirps": [
+    {
+      "id": 1,
+      "username": "user123",
+      "content": "Just saw the most amazing sunset! #blessed",
+      "posted_at": "2024-10-01T13:00:00Z"
+    },
+    {
+      "id": 2,
+      "username": "tech_guru",
+      "content": "Excited about the new tech conference next week. So many great speakers lined up!",
+      "posted_at": "2024-10-01T14:00:00Z"
+    },
+    {
+      "id": 3,
+      "username": "foodie_lover",
+      "content": "Tried the new sushi place downtown. Absolutely delicious! Highly recommend the dragon roll.",
+      "posted_at": "2024-10-01T15:00:00Z"
+    },
+    {
+      "id": 4,
+      "username": "travel_bug",
+      "content": "Planning my next trip to Japan. Can't wait to explore Tokyo and Kyoto!",
+      "posted_at": "2024-10-01T16:00:00Z"
+    },
+    {
+      "id": 5,
+      "username": "fitness_freak",
+      "content": "Just finished a 10k run. Feeling great and ready to tackle the day!",
+      "posted_at": "2024-10-01T17:00:00Z"
+    },
+    {
+      "id": 6,
+      "username": "movie_buff",
+      "content": "Watched the latest blockbuster last night. The special effects were mind-blowing!",
+      "posted_at": "2024-10-01T18:00:00Z"
+    },
+    {
+      "id": 7,
+      "username": "music_lover",
+      "content": "Listening to the new album by my favorite band. Every track is a hit!",
+      "posted_at": "2024-10-01T19:00:00Z"
+    },
+    {
+      "id": 8,
+      "username": "bookworm",
+      "content": "Just finished reading an amazing novel. The plot twists were incredible!",
+      "posted_at": "2024-10-01T20:00:00Z"
+    },
+    {
+      "id": 9,
+      "username": "gamer_guy",
+      "content": "Spent the weekend playing the new RPG. The graphics and storyline are top-notch!",
+      "posted_at": "2024-10-01T21:00:00Z"
+    },
+    {
+      "id": 10,
+      "username": "nature_enthusiast",
+      "content": "Went hiking in the mountains today. The views were breathtaking!",
+      "posted_at": "2024-10-01T22:00:00Z"
+    },
+    {
+      "id": 11,
+      "username": "ex_emacs_user",
+      "content": "Just finished reading the xkcd on text editors. Does anyone know where I can find some butterflies?",
+      "posted_at": "2024-10-03T20:00:00Z"
+    }
+  ]
+}

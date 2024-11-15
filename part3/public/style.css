@@ -1,0 +1,98 @@
+/* general styles */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f5f8fa;
+    margin: 0;
+    padding: 0;
+    color: #14171a;
+}
+
+header {
+    background-color: #1da1f2;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    font-size: 24px;
+    box-shadow: 0 4px 2px -2px gray;
+}
+
+/* form styling */
+form {
+    background-color: #fff;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 600px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-weight: bold;
+    color: #657786;
+    display: block;
+    margin-bottom: 5px;
+}
+
+input[type="text"], textarea {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccd6dd;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 14px;
+}
+
+textarea {
+    resize: none;
+    height: 100px;
+}
+
+button {
+    background-color: #1da1f2;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #1991da;
+}
+
+/* timeline and chirps styling */
+#timeline {
+    max-width: 600px;
+    margin: 20px auto;
+    background-color: #f5f8fa;
+}
+
+.chirp {
+    background-color: #fff;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    margin: 10px 0;
+    padding: 15px;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1);
+}
+
+.chirp h3 {
+    font-size: 16px;
+    color: #14171a;
+    margin-bottom: 5px;
+}
+
+.chirp p {
+    font-size: 14px;
+    color: #657786;
+}
+
+.posted_at {
+    font-size: 12px;
+    color: #aab8c2;
+    text-align: right;
+}

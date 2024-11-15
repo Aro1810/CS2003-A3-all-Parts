@@ -1,0 +1,157 @@
+Step 1: Setting Up the Server
+1. Use the Configuration Class
+
+The Configuration class is already provided. It reads the cs2003-C3.properties file to load parameters like the serverPort and documentRoot.
+The important values you’ll need are:
+serverPort: The port the server will listen on.
+documentRoot: The folder where static files (like HTML, CSS, and JavaScript) are stored.
+Make sure the configuration file is set up correctly (e.g., port number within the valid range).
+
+2. Create a Basic HTTP Server
+
+Use Java’s ServerSocket to create the server.
+The server should:
+Bind to the port specified in the configuration.
+Wait for client connections.
+Handle incoming requests.
+Here’s a simple example:
+
+import java.io.*;
+import java.net.*;
+
+public class ChirplyServer {
+    private int port;
+    private String documentRoot;
+
+    public ChirplyServer(int port, String documentRoot) {
+        this.port = port;
+        this.documentRoot = documentRoot;
+    }
+
+    public void startServer() {
+        try (ServerSocket serverSocket = new ServerSocket(port)) {
+            System.out.println("Server started on port " + port);
+            while (true) {
+                Socket clientSocket = serverSocket.accept();
+                new Thread(new ClientHandler(clientSocket, documentRoot)).start(); // Handle each client in a new thread
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public static void main(String[] args) {
+        Configuration config = new Configuration("cs2003-C3.properties");
+        ChirplyServer server = new ChirplyServer(config.serverPort_, config.documentRoot_);
+        server.startServer();
+    }
+}
+3. Serve Static Files
+
+The ClientHandler class will handle individual client requests.
+When the client requests /:
+Serve the index.html file from the documentRoot directory.
+For other file requests (e.g., CSS or JavaScript):
+Check if the file exists in the documentRoot.
+If the file exists, serve it with the correct Content-Type.
+If the file doesn’t exist, return a 404 Not Found response.
+Example ClientHandler code:
+
+class ClientHandler implements Runnable {
+    private Socket clientSocket;
+    private String documentRoot;
+
+    public ClientHandler(Socket clientSocket, String documentRoot) {
+        this.clientSocket = clientSocket;
+        this.documentRoot = documentRoot;
+    }
+
+    @Override
+    public void run() {
+        try (BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+             PrintWriter out = new PrintWriter(clientSocket.getOutputStream());
+             OutputStream dataOut = clientSocket.getOutputStream()) {
+
+            String requestLine = in.readLine();
+            if (requestLine == null) return;
+            
+            String[] requestParts = requestLine.split(" ");
+            String method = requestParts[0];
+            String filePath = requestParts[1].equals("/") ? "/index.html" : requestParts[1];
+
+            File file = new File(documentRoot + filePath);
+            if (file.exists() && !file.isDirectory()) {
+                String mimeType = getMimeType(filePath);
+                byte[] fileData = readFile(file);
+
+                out.println("HTTP/1.1 200 OK");
+                out.println("Content-Type: " + mimeType);
+                out.println("Content-Length: " + fileData.length);
+                out.println();
+                out.flush();
+                dataOut.write(fileData);
+                dataOut.flush();
+            } else {
+                out.println("HTTP/1.1 404 Not Found");
+                out.println("Content-Type: text/html");
+                out.println();
+                out.println("<h1>404 Not Found</h1>");
+                out.flush();
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    private String getMimeType(String filePath) {
+        if (filePath.endsWith(".html")) return "text/html";
+        if (filePath.endsWith(".css")) return "text/css";
+        if (filePath.endsWith(".js")) return "application/javascript";
+        return "application/octet-stream";
+    }
+
+    private byte[] readFile(File file) throws IOException {
+        try (FileInputStream fis = new FileInputStream(file)) {
+            return fis.readAllBytes();
+        }
+    }
+}
+Step 2: Handling Chirp Storage
+1. Initialize the Store Class
+
+Use the Store class to manage chirps in memory.
+When the server starts, load initial chirps from a JSON file (if provided).
+Use methods like addChirp, getAllChirps, and getAllChirpsAsJson to manage chirps dynamically.
+Example:
+
+Store chirpStore = new Store();
+chirpStore.addFromJson(loadInitialChirps());
+Step 3: Implementing the Endpoints
+GET /chirps
+
+If there are chirps:
+Return a 200 OK status and the chirps as a JSON array.
+If no chirps:
+Return a 204 No Content status.
+POST /chirps
+
+Parse the request body to extract the username and content.
+Use the addChirp method of the Store class to add the chirp.
+Return the created chirp with a 201 Created status.
+Step 4: Multi-Threaded Request Handling
+Use a Thread Pool
+
+To handle multiple clients efficiently, use ExecutorService for threading:
+ExecutorService threadPool = Executors.newFixedThreadPool(10);
+while (true) {
+    Socket clientSocket = serverSocket.accept();
+    threadPool.submit(new ClientHandler(clientSocket, documentRoot));
+}
+Step 5: Testing
+Static File Serving: Open localhost:<port> in the browser to verify files are served.
+GET /chirps: Use curl or Postman:
+curl -X GET http://localhost:<port>/chirps
+POST /chirps: Send a POST request:
+curl -X POST -H "Content-Type: application/json" -d '{"username": "test", "content": "Hello!"}' http://localhost:<port>/chirps
+This structure should make the tasks clearer and more manageable. Let me know if you need help with any specific step!

@@ -1,0 +1,7 @@
+tests with a big files (if big files in public folder can be loaded)
+test connecting mutiple clients 
+test using curl and end points 
+
+add message when there are no chirps 
+
+add a check if keep clicked ok when editing the chirps details if at the end it is the same then just say nothing updated and dont update anything (in js)

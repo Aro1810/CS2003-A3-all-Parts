@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Chirply</title>
+    <link rel="stylesheet" href="style.css" />
+    <script type="module" src="script.js"></script>
+  </head>
+  <body>
+    <header>
+      <h1>Chirply</h1>
+    </header>
+    <main>
+      <form id="post-form">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" />
+        <label for="content">What is on your mind?</label>
+        <textarea id="content" name="content"></textarea>
+        <button type="submit">Post</button>
+      </form>
+      <div id="timeline">
+        <div class="chirp">
+          <h3 class="username">User1</h3>
+          <p class="content">This is a chirp!</p>
+          <p class="posted_at">Posted at: Tue 29th Oct 10:00 AM</p>
+        </div>
+        <div class="chirp">
+          <h3 class="username">User2</h3>
+          <p class="content">Another chirp here!</p>
+          <p class="posted_at">Posted at: Tue 29th Oct 10:05 AM</p>
+        </div>
+        <div class="chirp">
+          <h3 class="username">User1</h3>
+          <p class="content">This is a chirp!</p>
+          <p class="posted_at">Posted at: Tue 29th Oct 10:00 AM</p>
+        </div>
+      </div>
+    </main>
+  </body>
+</html>

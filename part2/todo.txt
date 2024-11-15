@@ -1,0 +1,5 @@
+tests with a big files (if big files in public folder can be loaded)
+test connecting mutiple clients 
+test using curl and end points 
+
+add message when there are no chirps 
